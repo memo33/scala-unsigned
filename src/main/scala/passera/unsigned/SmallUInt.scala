@@ -85,20 +85,20 @@ trait SmallUInt[U <: Unsigned[U, UInt, Int]] extends Any with Unsigned[U, UInt, 
   def <=(x: ULong): Boolean = this.toULong <= x
   def >=(x: ULong): Boolean = this.toULong >= x
 
-  def +(x: UInt) = UInt(intRep + x.intRep)
-  def -(x: UInt) = UInt(intRep - x.intRep)
-  def *(x: UInt) = UInt(intRep * x.intRep)
+  def +(x: UInt) = UInt(intRep + (x: SmallUInt[UInt]).intRep)
+  def -(x: UInt) = UInt(intRep - (x: SmallUInt[UInt]).intRep)
+  def *(x: UInt) = UInt(intRep * (x: SmallUInt[UInt]).intRep)
 
   def /(x: UInt) = {
     val n = intRep & 0xffffffffL
-    val m = x.intRep & 0xffffffffL
+    val m = (x: SmallUInt[UInt]).intRep & 0xffffffffL
     val r = n / m
     UInt(r.toInt)
   }
 
   def %(x: UInt) = {
     val n = intRep & 0xffffffffL
-    val m = x.intRep & 0xffffffffL
+    val m = (x: SmallUInt[UInt]).intRep & 0xffffffffL
     val r = n % m
     UInt(r.toInt)
   }
@@ -128,7 +128,7 @@ trait SmallUInt[U <: Unsigned[U, UInt, Int]] extends Any with Unsigned[U, UInt, 
   // comparing a number on the left with a UInt on the right.
   // This is an (undocumented?) hack and might change in the future.
   override def equals(x: Any) = x match {
-    case x: SmallUInt[_] => this.toInt == x.intRep
+    case x: SmallUInt[_] => this.toInt == (x: SmallUInt[UInt]).intRep
     case x: ULong => this.toULong == x
     case x: Number => this.longValue == x.longValue && x.longValue >= 0
     case _ => false
@@ -143,14 +143,14 @@ trait SmallUInt[U <: Unsigned[U, UInt, Int]] extends Any with Unsigned[U, UInt, 
 
   private def rot(x: Int) = (x + Int.MinValue)
 
-  def <(x: UInt) = rot(intRep) < rot(x.intRep)
-  def >(x: UInt) = rot(intRep) > rot(x.intRep)
-  def <=(x: UInt) = rot(intRep) <= rot(x.intRep)
-  def >=(x: UInt) = rot(intRep) >= rot(x.intRep)
+  def <(x: UInt) = rot(intRep) < rot((x: SmallUInt[UInt]).intRep)
+  def >(x: UInt) = rot(intRep) > rot((x: SmallUInt[UInt]).intRep)
+  def <=(x: UInt) = rot(intRep) <= rot((x: SmallUInt[UInt]).intRep)
+  def >=(x: UInt) = rot(intRep) >= rot((x: SmallUInt[UInt]).intRep)
 
-  def &(x : UInt) = UInt(intRep & x.intRep)
-  def |(x : UInt) = UInt(intRep | x.intRep)
-  def ^(x : UInt) = UInt(intRep ^ x.intRep)
+  def &(x : UInt) = UInt(intRep & (x: SmallUInt[UInt]).intRep)
+  def |(x : UInt) = UInt(intRep | (x: SmallUInt[UInt]).intRep)
+  def ^(x : UInt) = UInt(intRep ^ (x: SmallUInt[UInt]).intRep)
 
   def unary_~ = UInt(~intRep)
 
