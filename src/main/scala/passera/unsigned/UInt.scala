@@ -2,7 +2,6 @@ package passera.unsigned
 
 import scala.math.{ScalaNumber, ScalaNumericConversions}
 
-@serializable
 class UInt(val intValue: Int) extends AnyVal with SmallUInt[UInt] {
   override def toUInt = this
   private def intRep = intValue
