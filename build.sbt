@@ -1,6 +1,10 @@
 name := "scala-unsigned"
 
-version := "0.1.1"
+organization := "com.github.memo33"
+
+version := "0.1.3"
+
+licenses += ("BSD 2-Clause", url("https://opensource.org/licenses/BSD-2-Clause"))
 
 scalaVersion := "2.11.0"
 
