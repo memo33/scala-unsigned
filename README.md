@@ -1,6 +1,8 @@
 Passera
 =======
 
+[ ![Download](https://api.bintray.com/packages/memo33/maven/scala-unsigned/images/download.svg) ](https://bintray.com/memo33/maven/scala-unsigned/_latestVersion)
+
 This is an implementation of unsigned integers for Scala.
 This is still very much a work in progress.  
 Much of it was written a while ago as an exercise in learning Scala.
